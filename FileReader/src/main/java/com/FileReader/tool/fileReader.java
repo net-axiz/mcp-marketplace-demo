@@ -25,3 +25,5 @@ public class fileReader {
 
         catch (Exception e){
             log.error ("File cannot read", e); return "Cant Find: " + e.getMessage();}}}
+
+/* her ne kadar file path girmen gerekse de bir şekilde de olsa sorunu çözdüm bunu gidip obsidiana not aldım. */

@@ -1,1 +1,0 @@
-/* Bu dosyada sistemler ayağa kalkacak başlatma durdurma yapılacaktır */

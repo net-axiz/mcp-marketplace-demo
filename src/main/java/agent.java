@@ -1,1 +1,0 @@
-/* agent işlemleri bu java dosyasında olacak. */

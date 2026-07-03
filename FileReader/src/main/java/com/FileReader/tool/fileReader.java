@@ -1,6 +1,5 @@
 package com.FileReader.tool;
 
-import java.util.logging.Logger;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,17 +14,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class fileReader {
 
-    private static final Logger log = (java.util.logging.Logger) LoggerFactory.getLogger(fileReader.class);
+    private static final Logger log = LoggerFactory.getLogger(fileReader.class);
 
     @McpTool(name = "read", description = "Reads files.")
     public String readFile(@McpToolParam(description = "File Name", required = true) String fileName) {
-        try{Path filePath = Path.of(fileName);
-        return Files.readString(filePath);} 
+        try{
+            File file = new File(fileName);
+            Path path = file.toPath();
+            return Files.readString(path);}
 
-        catch (Exception e){log.error("File cannot read", e);
-            return "This is Error: " + e.getMessage();     
-        }
-        
-
-    }
-}
+        catch (Exception e){
+            log.error ("File cannot read", e); return "Cant Find: " + e.getMessage();}}}

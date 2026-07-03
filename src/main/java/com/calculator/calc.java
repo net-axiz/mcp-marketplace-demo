@@ -1,3 +1,10 @@
+package com.calculator.CalcMcpServerApplication.tools;
+
+import org.springframework.ai.mcp.server.annotation.McpTool;
+import org.springframework.ai.mcp.server.annotation.McpToolParam;
+import org.springframework.stereotype.Component;
+
+
 @Component
 public class calc {
     @Mcptool(name ="add", description = "Add two numbers together")

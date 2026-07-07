@@ -33,13 +33,10 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- MCP Server, HTTP üzerinden erişim için (webmvc) -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
         </dependency>
-
-        <!-- Test için -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

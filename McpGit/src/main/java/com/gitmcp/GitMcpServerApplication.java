@@ -1,4 +1,4 @@
-package com.gitMcp;
+package com.gitmcp;
 
 
 import org.springframework.boot.SpringApplication;

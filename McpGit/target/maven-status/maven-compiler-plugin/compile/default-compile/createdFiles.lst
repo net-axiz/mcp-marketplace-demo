@@ -1,0 +1,3 @@
+com/gitmcp/tool/GitMcp.class
+com/gitmcp/GitMcpServerApplication.class
+com/gitmcp/service/BranchNameGenerator.class

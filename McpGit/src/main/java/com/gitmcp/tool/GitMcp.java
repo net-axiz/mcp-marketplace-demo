@@ -4,12 +4,9 @@ import com.gitmcp.service.BranchNameGenerator;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.*;
 import java.util.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springaicommunity.mcp.annotation.McpTool;
 import org.springaicommunity.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Component;
@@ -32,7 +29,7 @@ public class GitMcp {
         @McpToolParam(description = "Relative file path within the repo", required = true) String fileName) 
         throws IOException { Path root = Paths.get(repoPath).normalize().toAbsolutePath(); Path fullPath = root.resolve(fileName).normalize();
 
-        if (!fullPath.startsWith(root)) { throw new SecurityException("Erişim reddedildi");}
+        if (!fullPath.startsWith(root)) {throw new SecurityException("Erişim reddedildi");}
 
         return Files.readString(fullPath);}
 

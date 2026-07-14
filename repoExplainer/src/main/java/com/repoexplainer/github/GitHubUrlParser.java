@@ -4,13 +4,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * GitHub URL'lerini owner/repo çiftine ayrıştıran yardımcı sınıf.
- *
- * Ne yapar:
- * - Farklı formatlardaki GitHub linklerini alır.
- * - owner ve repo bilgisini çıkarır.
- *
+/*
  * Desteklenen formatlar:
  * - https://github.com/owner/repo
  * - http://github.com/owner/repo
@@ -21,11 +15,6 @@ import java.util.regex.Pattern;
  * - https://github.com/owner/repo/
  */
 public class GitHubUrlParser {
-
-    /**
-     * owner ve repo bilgisini tutan basit veri sınıfı.
-     * Örnek: GitHubRepo("spring-projects", "spring-boot")
-     */
     public record GitHubRepo(String owner, String repo) {}
 
     /*
@@ -42,14 +31,6 @@ public class GitHubUrlParser {
     private static final Pattern GITHUB_PATTERN = Pattern.compile(
             "^(?:https?://)?(?:www\\.)?(?:github\\.com/)?([^/]+)/([^/]+?)(?:\\.git)?/?$"
     );
-
-    /**
-     * Verilen URL'i parse eder, owner/repo çiftini döndürür.
-     *
-     * @param url GitHub linki (herhangi bir formatta)
-     * @return Optional.of(GitHubRepo) → başarılı parse
-     *         Optional.empty()        → geçersiz URL
-     */
     public static Optional<GitHubRepo> parse(String url) {
         if (url == null || url.isBlank()) {
             return Optional.empty();

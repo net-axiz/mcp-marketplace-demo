@@ -1,6 +1,4 @@
-
 # Repo Explainer — Uygulama Yapılandırması
-
 spring:
   application:
     name: repo-explainer

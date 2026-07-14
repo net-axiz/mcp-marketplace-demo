@@ -12,11 +12,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-/**
- * GitHub REST API ile konuşan istemci sınıfı.
- * Tüm istekler WebClient üzerinden yapılır.
- * Base64 ile gelen içerikler burada decode edilir.
- */
 @Component
 public class GitHubApiClient {
 
@@ -27,15 +22,6 @@ public class GitHubApiClient {
     public GitHubApiClient(WebClient githubWebClient) {
         this.webClient = githubWebClient;
     }
-
-    /**
-     * Repo'nun README dosyasını çeker.
-     * GitHub API: GET /repos/{owner}/{repo}/readme
-     *
-     * @return README içeriği (base64'ten decode edilmiş metin) veya null
-     *         (bulunamazsa)
-     * @throws WebClientResponseException 401/403 gibi hatalarda
-     */
     public String fetchReadme(String owner, String repo) {
         try {
             JsonNode response = webClient.get()
@@ -51,19 +37,11 @@ public class GitHubApiClient {
             return null;
 
         } catch (WebClientResponseException.NotFound e) {
-            // 404 = README yok, bu normal bir durum
             log.debug("README bulunamadı: {}/{}", owner, repo);
             return null;
         }
-        // 401/403 gibi hatalar yukarıya fırlatılır
     }
 
-    /**
-     * Repo'nun varsayılan branch adını öğrenir.
-     * GitHub API: GET /repos/{owner}/{repo}
-     * 
-     * @return Branch adı (örn: "main", "master")
-     */
     public String fetchDefaultBranch(String owner, String repo) {
         JsonNode response = webClient.get()
                 .uri("/repos/{owner}/{repo}", owner, repo)
@@ -77,12 +55,6 @@ public class GitHubApiClient {
         return "main"; // Fallback
     }
 
-    /**
-     * Repo'nun tüm dosya ağacını çeker (recursive).
-     * GitHub API: GET /repos/{owner}/{repo}/git/trees/{branch}?recursive=1
-     *
-     * @return Dosya yollarının listesi (sadece "blob" tipindekiler, dizinler hariç)
-     */
     public List<String> fetchTree(String owner, String repo, String branch) {
         List<String> paths = new ArrayList<>();
 
@@ -95,7 +67,6 @@ public class GitHubApiClient {
 
             if (response != null && response.has("tree")) {
                 for (JsonNode node : response.get("tree")) {
-                    // Sadece dosyaları al (blob), dizinleri atla (tree)
                     if ("blob".equals(node.get("type").asText())) {
                         paths.add(node.get("path").asText());
                     }
@@ -107,13 +78,6 @@ public class GitHubApiClient {
 
         return paths;
     }
-
-    /**
-     * Tek bir dosyanın içeriğini çeker.
-     * GitHub API: GET /repos/{owner}/{repo}/contents/{path}
-     *
-     * @return Dosya içeriği (base64'ten decode edilmiş) veya null
-     */
     public String fetchFileContent(String owner, String repo, String path) {
         try {
             JsonNode response = webClient.get()
@@ -135,7 +99,6 @@ public class GitHubApiClient {
     }
 
     private String decodeBase64(String base64Content) {
-        // GitHub base64 içinde \n karakterleri koyuyor, temizle
         String cleaned = base64Content.replaceAll("\\s", "");
         byte[] decoded = Base64.getDecoder().decode(cleaned);
         return new String(decoded, StandardCharsets.UTF_8);

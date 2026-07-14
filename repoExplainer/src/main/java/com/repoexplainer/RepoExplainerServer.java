@@ -3,10 +3,6 @@ package com.repoexplainer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * Repo Explainer MCP Sunucusu.
- * GitHub repolarını analiz edip açıklama üreten bir MCP bileşeni.
- */
 @SpringBootApplication
 public class RepoExplainerServer {
 

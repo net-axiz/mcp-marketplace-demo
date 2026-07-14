@@ -1,3 +1,14 @@
-com/sqlexplainer/SqlExplainerServer.class
-com/sqlexplainer/service/SqlExplainerService.class
-com/sqlexplainer/tool/SqlExplainerTool.class
+com/repoexplainer/github/model/ReadmeResult$Error.class
+com/repoexplainer/github/GitHubApiClient.class
+com/repoexplainer/config/LlmConfig.class
+com/repoexplainer/github/model/ReadmeResult$Found.class
+com/repoexplainer/orchestration/RepoExplainerService.class
+com/repoexplainer/config/GitHubConfig.class
+com/repoexplainer/github/model/ReadmeResult$NotFound.class
+com/repoexplainer/orchestration/FallbackScanner.class
+com/repoexplainer/github/GitHubUrlParser.class
+com/repoexplainer/github/GitHubUrlParser$GitHubRepo.class
+com/repoexplainer/RepoExplainerServer.class
+com/repoexplainer/tool/RepoExplainerTool.class
+com/repoexplainer/github/GitHubReadmeService.class
+com/repoexplainer/github/model/ReadmeResult.class

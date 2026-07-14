@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: Git-mcp-server
+  ai:
+    mcp:
+      server:
+        annotation-scanner:
+          enabled: true
+        protocol: STREAMABLE
+        stdio: false
+        type: SYNC
+
+server:
+  port: ${SERVER_PORT:8081}

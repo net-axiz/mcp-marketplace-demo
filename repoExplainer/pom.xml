@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.3</version>
+        <version>3.4.3</version>
     </parent>
 
     <groupId>com.repoexplainer</groupId>
@@ -46,10 +46,10 @@
             <artifactId>spring-ai-starter-mcp-client-webflux</artifactId>
         </dependency>
 
-        <!-- Anthropic: LLM çağrısı için (ChatClient/ChatModel) -->
+        <!-- Ollama: Yerel LLM çağrısı için (ChatClient/ChatModel) -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-anthropic</artifactId>
+            <artifactId>spring-ai-starter-model-ollama</artifactId>
         </dependency>
 
         <!-- WebFlux: GitHub API çağrıları için WebClient -->

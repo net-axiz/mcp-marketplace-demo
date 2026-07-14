@@ -1,0 +1,39 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.3)
+
+2026-07-14T13:13:12.988Z  INFO 1 --- [repo-explainer] [           main] com.repoexplainer.RepoExplainerServer    : Starting RepoExplainerServer v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/app/app.jar started by root in /app)
+2026-07-14T13:13:12.999Z DEBUG 1 --- [repo-explainer] [           main] com.repoexplainer.RepoExplainerServer    : Running with Spring Boot v3.4.3, Spring v6.2.3
+2026-07-14T13:13:13.001Z  INFO 1 --- [repo-explainer] [           main] com.repoexplainer.RepoExplainerServer    : No active profile set, falling back to 1 default profile: "default"
+2026-07-14T13:13:16.395Z  WARN 1 --- [repo-explainer] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-07-14T13:13:16.399Z  WARN 1 --- [repo-explainer] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'serverAnnotatedBeanRegistry' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerAutoConfiguration$ServerMcpAnnotatedBeans] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-07-14T13:13:16.423Z  WARN 1 --- [repo-explainer] [           main] trationDelegate$BeanPostProcessorChecker : Bean 'spring.ai.mcp.server.annotation-scanner-org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties' of type [org.springframework.ai.mcp.server.common.autoconfigure.annotations.McpServerAnnotationScannerProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected/applied to a currently created BeanPostProcessor [serverAnnotatedMethodBeanPostProcessor]? Check the corresponding BeanPostProcessor declaration and its dependencies/advisors. If this bean does not have to be post-processed, declare it with ROLE_INFRASTRUCTURE.
+2026-07-14T13:13:17.071Z  INFO 1 --- [repo-explainer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8084 (http)
+2026-07-14T13:13:17.114Z  INFO 1 --- [repo-explainer] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-14T13:13:17.115Z  INFO 1 --- [repo-explainer] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.36]
+2026-07-14T13:13:17.186Z  INFO 1 --- [repo-explainer] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-14T13:13:17.190Z  INFO 1 --- [repo-explainer] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4021 ms
+2026-07-14T13:13:18.910Z  INFO 1 --- [repo-explainer] [or-http-epoll-2] i.m.client.LifecycleInitializer          : Server response with Protocol: 2025-06-18, Capabilities: ServerCapabilities[completions=CompletionCapabilities[], experimental=null, logging=LoggingCapabilities[], prompts=PromptCapabilities[listChanged=true], resources=ResourceCapabilities[subscribe=false, listChanged=true], tools=ToolCapabilities[listChanged=true]], Info: Implementation[name=mcp-server, title=null, version=1.0.0] and Instructions null
+2026-07-14T13:13:19.043Z  INFO 1 --- [repo-explainer] [or-http-epoll-3] i.m.client.LifecycleInitializer          : Server response with Protocol: 2025-06-18, Capabilities: ServerCapabilities[completions=CompletionCapabilities[], experimental=null, logging=LoggingCapabilities[], prompts=PromptCapabilities[listChanged=true], resources=ResourceCapabilities[subscribe=false, listChanged=true], tools=ToolCapabilities[listChanged=true]], Info: Implementation[name=mcp-server, title=null, version=1.0.0] and Instructions null
+2026-07-14T13:13:19.379Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable tools capabilities, notification: true
+2026-07-14T13:13:19.380Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Registered tools: 5
+2026-07-14T13:13:19.380Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources capabilities, notification: true
+2026-07-14T13:13:19.381Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable resources templates capabilities, notification: true
+2026-07-14T13:13:19.381Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable prompts capabilities, notification: true
+2026-07-14T13:13:19.381Z  INFO 1 --- [repo-explainer] [           main] o.s.a.m.s.c.a.McpServerAutoConfiguration : Enable completions capabilities
+2026-07-14T13:13:19.421Z  WARN 1 --- [repo-explainer] [           main] o.s.m.p.s.SyncMcpSamplingProvider        : No sampling methods found
+2026-07-14T13:13:19.423Z  WARN 1 --- [repo-explainer] [           main] o.s.m.p.e.SyncMcpElicitationProvider     : No elicitation methods found
+2026-07-14T13:13:19.448Z  INFO 1 --- [repo-explainer] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8084 (http) with context path '/'
+2026-07-14T13:13:19.462Z  INFO 1 --- [repo-explainer] [           main] com.repoexplainer.RepoExplainerServer    : Started RepoExplainerServer in 7.3 seconds (process running for 8.472)
+2026-07-14T13:13:30.959Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-14T13:13:30.960Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-14T13:13:30.961Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-14T13:13:30.997Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] c.r.orchestration.RepoExplainerService   : Repo analiz ediliyor: JustVugg/colibri
+2026-07-14T13:13:31.939Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] c.r.github.GitHubReadmeService           : README bulundu: JustVugg/colibri (46015 karakter)
+2026-07-14T13:13:31.940Z  INFO 1 --- [repo-explainer] [nio-8084-exec-1] c.r.orchestration.RepoExplainerService   : README bulundu, LLM'e gönderiliyor...

@@ -1,9 +1,9 @@
-# Repo Explainer — Uygulama Yapılandırması
+# Repo Explainer
 spring:
   application:
     name: repo-explainer
 
-  # --- MCP Server Ayarları (kendini dışarıya açmak için) ---
+  # ---MCP Server---
   ai:
     mcp:
       server:
@@ -11,7 +11,7 @@ spring:
         stdio: false
         type: SYNC
 
-      # --- MCP Client Ayarları (diğer sunuculara bağlanmak için) ---
+      # ---MCP Client---
       client:
         enabled: true
         name: repo-explainer-client
@@ -21,20 +21,19 @@ spring:
         sse:
           connections:
             git-mcp:
-              url: http://localhost:8081
+              url: http://mcp-git:8081
             sql-explainer:
-              url: http://localhost:8082
+              url: http://sqlmcp:8082
 
-    # --- Anthropic (LLM) Ayarları ---
+    # --- Anthropic (LLM)---
     anthropic:
       api-key: ${ANTHROPIC_API_KEY:}
       chat:
         options:
           model: claude-sonnet-4-20250514
 
-# --- Sunucu Portu ---
 server:
-  port: ${SERVER_PORT:8003}
+  port: ${SERVER_PORT:8084}
 
 # --- GitHub Token ---
 github:

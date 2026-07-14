@@ -1,2 +1,4 @@
-com/FileReader/fileReaderMcpServerApplication.class
-com/FileReader/tool/fileReader.class
+com/FileReader/tool/FileReaderTool.class
+com/FileReader/FileReaderMcpServerApplication.class
+com/FileReader/service/LocalFileReadingService.class
+com/FileReader/service/FileReadingService.class

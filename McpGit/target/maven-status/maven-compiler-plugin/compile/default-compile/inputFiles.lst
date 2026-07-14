@@ -1,3 +1,6 @@
 /home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/GitMcpServerApplication.java
-/home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/service/BranchNameGenerator.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/service/BranchNamingService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/service/DefaultBranchNamingService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/service/LocalRepositoryDocumentService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/service/RepositoryDocumentService.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/McpGit/src/main/java/com/gitmcp/tool/GitMcp.java

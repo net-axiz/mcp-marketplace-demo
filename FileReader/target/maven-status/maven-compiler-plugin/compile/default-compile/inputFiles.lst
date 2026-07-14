@@ -1,2 +1,4 @@
-/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/FileReader/tool/fileReader.java
-/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/fileReaderMcpServerApplication.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/FileReader/FileReaderMcpServerApplication.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/FileReader/service/FileReadingService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/FileReader/service/LocalFileReadingService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/FileReader/src/main/java/com/FileReader/tool/FileReaderTool.java

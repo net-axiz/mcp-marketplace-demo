@@ -13,6 +13,7 @@ public class RepoExplainerTool {
     public RepoExplainerTool(RepoExplainerService service) {
         this.service = service;
     }
+
     @McpTool(description = "Verilen GitHub reposunu analiz eder ve Türkçe bir açıklama üretir. "
             + "README varsa onu özetler, yoksa önemli dosyaları tarayarak repoyu açıklar.")
     public String explainRepo(

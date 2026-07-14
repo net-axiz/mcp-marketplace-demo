@@ -1,3 +1,6 @@
+com/sqlexplainer/model/SqlQueryParts.class
 com/sqlexplainer/SqlExplainerServer.class
+com/sqlexplainer/service/RegexSqlParser.class
+com/sqlexplainer/service/SqlParser.class
 com/sqlexplainer/service/SqlExplainerService.class
 com/sqlexplainer/tool/SqlExplainerTool.class

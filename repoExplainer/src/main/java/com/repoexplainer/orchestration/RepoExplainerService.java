@@ -9,18 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.stereotype.Service;
 
-/**
- * Ana orkestrasyon servisi — her şeyi birleştiren beyin.
- *
- * Ne yapar (sırasıyla):
- * 1. URL'i parse et → owner/repo çıkar.
- * 2. README'yi çekmeye çalış.
- * 3. README varsa → LLM'e gönder, "bu repoyu açıkla" de.
- * 4. README yoksa → FallbackScanner ile önemli dosyaları topla → LLM'e gönder.
- * 5. LLM'in ürettiği açıklamayı döndür.
- *
- * Bu sınıf hiçbir API çağrısı yapmaz, sadece diğer servisleri çağırır.
- */
 @Service
 public class RepoExplainerService {
 
@@ -39,14 +27,8 @@ public class RepoExplainerService {
         this.chatClient = chatClient;
     }
 
-    /**
-     * Verilen GitHub URL'ini analiz edip açıklama üretir.
-     *
-     * @param githubUrl GitHub linki (herhangi bir formatta)
-     * @return LLM'in ürettiği repo açıklaması
-     */
+
     public String explainRepo(String githubUrl) {
-        // 1. URL'i parse et
         GitHubRepo ghRepo = GitHubUrlParser.parse(githubUrl)
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Geçersiz GitHub URL: " + githubUrl));
@@ -55,10 +37,8 @@ public class RepoExplainerService {
         String repo = ghRepo.repo();
         log.info("Repo analiz ediliyor: {}/{}", owner, repo);
 
-        // 2. README'yi çek
         ReadmeResult readmeResult = readmeService.fetchReadme(owner, repo);
 
-        // 3. Duruma göre context hazırla ve LLM'e gönder
         return switch (readmeResult) {
             case ReadmeResult.Found found -> {
                 log.info("README bulundu, LLM'e gönderiliyor...");
@@ -76,9 +56,6 @@ public class RepoExplainerService {
         };
     }
 
-    /*
-     * README bulunduğunda LLM'e gönderilecek prompt."
-     */
     private String askLlmWithReadme(String owner, String repo, String readmeContent) {
         String prompt = """
                 Şu GitHub reposunun README dosyasını analiz et: %s/%s
@@ -95,10 +72,6 @@ public class RepoExplainerService {
 
         return callLlm(prompt);
     }
-
-    /**
-     * README olmadığında LLM'e gönderilecek prompt."
-     */
     private String askLlmWithFallback(String owner, String repo, String context) {
         String prompt = """
                 Şu GitHub reposunu analiz et: %s/%s
@@ -118,10 +91,6 @@ public class RepoExplainerService {
         return callLlm(prompt);
     }
 
-    /**
-     * LLM'e prompt gönderir ve cevabı döndürür.
-     * Yol haritası 5.2: Deterministik çağrı — tool callback yok, düz user mesajı.
-     */
     private String callLlm(String prompt) {
         try {
             return chatClient.prompt()

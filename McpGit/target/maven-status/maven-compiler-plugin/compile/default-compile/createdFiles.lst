@@ -1,2 +1,6 @@
 com/gitmcp/GitMcpServerApplication.class
-com/gitmcp/service/BranchNameGenerator.class
+com/gitmcp/service/BranchNamingService.class
+com/gitmcp/tool/GitMcp.class
+com/gitmcp/service/LocalRepositoryDocumentService.class
+com/gitmcp/service/DefaultBranchNamingService.class
+com/gitmcp/service/RepositoryDocumentService.class

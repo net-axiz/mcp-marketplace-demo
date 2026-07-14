@@ -1,3 +1,6 @@
 /home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/SqlExplainerServer.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/model/SqlQueryParts.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/service/RegexSqlParser.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/service/SqlExplainerService.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/service/SqlParser.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/sqlmcp/src/main/java/com/sqlexplainer/tool/SqlExplainerTool.java

@@ -57,36 +57,48 @@ public class RepoExplainerService {
     }
 
     private String askLlmWithReadme(String owner, String repo, String readmeContent) {
-        String prompt = """
-                Şu GitHub reposunun README dosyasını analiz et: %s/%s
+        String safeContent = readmeContent;
+        if (safeContent.length() > 5000) {
+            safeContent = safeContent.substring(0, 5000) + "\n\n... (Content truncated due to length for LLM performance) ...";
+            log.warn("README çok uzun, 5000 karaktere kısaltıldı: {}/{}", owner, repo);
+        }
 
-                README İÇERİĞİ:
+        String prompt = """
+                Analyze the README file of the following GitHub repository: %s/%s
+
+                README CONTENT:
                 %s
 
-                Lütfen şunları açıkla:
-                1. Proje ne işe yarıyor?
-                2. Hangi teknolojiler kullanılmış?
-                3. Nasıl kurulur ve çalıştırılır?
-                4. Projenin genel yapısı nasıl?
-                """.formatted(owner, repo, readmeContent);
+                Please explain the following:
+                1. What does this project do?
+                2. Which technologies are used?
+                3. How to install and run it?
+                4. What is the general structure of the project?
+                """.formatted(owner, repo, safeContent);
 
         return callLlm(prompt);
     }
     private String askLlmWithFallback(String owner, String repo, String context) {
+        String safeContent = context;
+        if (safeContent.length() > 5000) {
+            safeContent = safeContent.substring(0, 5000) + "\n\n... (Content truncated due to length for LLM performance) ...";
+            log.warn("Fallback içeriği çok uzun, 5000 karaktere kısaltıldı: {}/{}", owner, repo);
+        }
+
         String prompt = """
-                Şu GitHub reposunu analiz et: %s/%s
-                Bu repoda README dosyası yok. Aşağıda dosya ağacı ve bazı önemli dosyaların içerikleri var.
+                Analyze the following GitHub repository: %s/%s
+                This repository does not have a README file. Below is the file tree and contents of some important files.
 
                 %s
 
-                Bu bilgilere dayanarak:
-                1. Proje ne işe yarıyor?
-                2. Hangi teknolojiler kullanılmış?
-                3. Projenin genel yapısı nasıl?
+                Based on this information:
+                1. What does this project do?
+                2. Which technologies are used?
+                3. What is the general structure of the project?
 
-                ÖNEMLİ: Emin olmadığın noktaları açıkça belirt. Tahmin yapıyorsan "muhtemelen" veya "tahminim" gibi kelimeler kullan.
+                IMPORTANT: Explicitly state if you are unsure about any points. If making a guess, use words like "probably" or "my guess is".
                 """
-                .formatted(owner, repo, context);
+                .formatted(owner, repo, safeContent);
 
         return callLlm(prompt);
     }

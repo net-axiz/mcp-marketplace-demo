@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-git
+  namespace: repo-explainer
+  labels:
+    app: mcp-git
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-git
+  template:
+    metadata:
+      labels:
+        app: mcp-git
+    spec:
+      containers:
+        - name: mcp-git
+          image: mcp-git-image:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SERVER_PORT
+              value: "8081"
+          startupProbe:
+            tcpSocket:
+              port: 8081
+            failureThreshold: 20
+            periodSeconds: 2
+          readinessProbe:
+            tcpSocket:
+              port: 8081
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8081
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "384Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mcp-git-server
+  namespace: repo-explainer
+spec:
+  selector:
+    app: mcp-git
+  ports:
+    - port: 8081
+      targetPort: 8081
+  type: ClusterIP

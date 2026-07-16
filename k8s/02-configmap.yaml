@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: repo-explainer-config
+  namespace: repo-explainer
+data:
+  MCP_GIT_URL: "http://mcp-git-server:8081"
+  MCP_GIT_ENDPOINT: "/mcp"
+  SQL_EXPLAINER_URL: "http://sqlmcp-server:8082"
+  SQL_EXPLAINER_ENDPOINT: "/mcp"
+  OLLAMA_BASE_URL: "http://ollama-server:11434"

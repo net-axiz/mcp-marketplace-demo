@@ -1,4 +1,5 @@
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/RepoExplainerServer.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/TestController.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/config/GitHubConfig.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/config/LlmConfig.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/github/GitHubApiClient.java
@@ -6,5 +7,6 @@
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/github/GitHubUrlParser.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/github/model/ReadmeResult.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/orchestration/FallbackScanner.java
+/home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/orchestration/LegacyApiController.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/orchestration/RepoExplainerService.java
 /home/ub_lahmac/Codes/mcp-marketplace-demo/repoExplainer/src/main/java/com/repoexplainer/tool/RepoExplainerTool.java

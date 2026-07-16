@@ -5,8 +5,10 @@ com/repoexplainer/github/model/ReadmeResult$Found.class
 com/repoexplainer/orchestration/RepoExplainerService.class
 com/repoexplainer/config/GitHubConfig.class
 com/repoexplainer/github/model/ReadmeResult$NotFound.class
+com/repoexplainer/TestController.class
 com/repoexplainer/orchestration/FallbackScanner.class
 com/repoexplainer/github/GitHubUrlParser.class
+com/repoexplainer/orchestration/LegacyApiController.class
 com/repoexplainer/github/GitHubUrlParser$GitHubRepo.class
 com/repoexplainer/RepoExplainerServer.class
 com/repoexplainer/tool/RepoExplainerTool.class

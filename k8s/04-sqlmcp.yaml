@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sqlmcp
+  namespace: repo-explainer
+  labels:
+    app: sqlmcp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sqlmcp
+  template:
+    metadata:
+      labels:
+        app: sqlmcp
+    spec:
+      containers:
+        - name: sqlmcp
+          image: sqlmcp-image:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8082
+          env:
+            - name: SERVER_PORT
+              value: "8082"
+          startupProbe:
+            tcpSocket:
+              port: 8082
+            failureThreshold: 20
+            periodSeconds: 2
+          readinessProbe:
+            tcpSocket:
+              port: 8082
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8082
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "384Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqlmcp-server
+  namespace: repo-explainer
+spec:
+  selector:
+    app: sqlmcp
+  ports:
+    - port: 8082
+      targetPort: 8082
+  type: ClusterIP

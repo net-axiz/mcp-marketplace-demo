@@ -14,10 +14,10 @@ public class RepoExplainerTool {
         this.service = service;
     }
 
-    @McpTool(description = "Verilen GitHub reposunu analiz eder ve Türkçe bir açıklama üretir. "
-            + "README varsa onu özetler, yoksa önemli dosyaları tarayarak repoyu açıklar.")
+    @McpTool(description = "Analyzes a given GitHub repository and generates an English explanation. "
+            + "Summarizes the README if available, otherwise scans important files to explain the repo.")
     public String explainRepo(
-            @McpToolParam(description = "GitHub repo linki (örn: https://github.com/owner/repo)") String githubUrl) {
+            @McpToolParam(description = "GitHub repo link (e.g.: https://github.com/owner/repo)") String githubUrl) {
         return service.explainRepo(githubUrl);
     }
 }

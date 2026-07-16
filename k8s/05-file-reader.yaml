@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-reader
+  namespace: repo-explainer
+  labels:
+    app: file-reader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: file-reader
+  template:
+    metadata:
+      labels:
+        app: file-reader
+    spec:
+      containers:
+        - name: file-reader
+          image: file-reader-image:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8083
+          env:
+            - name: SERVER_PORT
+              value: "8083"
+          startupProbe:
+            tcpSocket:
+              port: 8083
+            failureThreshold: 20
+            periodSeconds: 2
+          readinessProbe:
+            tcpSocket:
+              port: 8083
+            initialDelaySeconds: 1
+            periodSeconds: 5
+          livenessProbe:
+            tcpSocket:
+              port: 8083
+            initialDelaySeconds: 1
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "384Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: file-reader-server
+  namespace: repo-explainer
+spec:
+  selector:
+    app: file-reader
+  ports:
+    - port: 8083
+      targetPort: 8083
+  type: ClusterIP

@@ -1,40 +1,39 @@
-# Repo Explainer — Uygulama Yapılandırması
+# Repo Explainer
 spring:
   application:
     name: repo-explainer
 
-  # --- MCP Server Ayarları (kendini dışarıya açmak için) ---
+  # --- AI Configuration ---
   ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: llama3.2 # 3B parametreli küçük model, 4GB VRAM'e sığması için
     mcp:
       server:
         protocol: STREAMABLE
         stdio: false
         type: SYNC
 
-      # --- MCP Client Ayarları (diğer sunuculara bağlanmak için) ---
+      # ---MCP Client---
       client:
         enabled: true
         name: repo-explainer-client
         type: SYNC
         toolcallback:
           enabled: true
-        sse:
+        streamable-http:
           connections:
             git-mcp:
-              url: http://localhost:8081
+              url: http://mcp-git-server:8081
+              endpoint: /mcp
             sql-explainer:
-              url: http://localhost:8082
+              url: http://sqlmcp-server:8082
+              endpoint: /mcp
 
-    # --- Anthropic (LLM) Ayarları ---
-    anthropic:
-      api-key: ${ANTHROPIC_API_KEY:}
-      chat:
-        options:
-          model: claude-sonnet-4-20250514
-
-# --- Sunucu Portu ---
 server:
-  port: ${SERVER_PORT:8003}
+  port: ${SERVER_PORT:8084}
 
 # --- GitHub Token ---
 github:

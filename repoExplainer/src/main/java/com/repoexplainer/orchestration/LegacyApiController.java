@@ -22,7 +22,7 @@ public class LegacyApiController {
             String explanation = repoExplainerService.explainRepo(githubUrl);
             return ResponseEntity.ok(explanation);
         } catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Hata: " + e.getMessage());
+            return ResponseEntity.internalServerError().body("Error: " + e.getMessage());
         }
     }
 }

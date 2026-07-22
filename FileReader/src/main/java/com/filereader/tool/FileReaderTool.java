@@ -1,6 +1,6 @@
-package com.FileReader.tool;
+package com.filereader.tool;
 
-import com.FileReader.service.FileReadingService;
+import com.filereader.service.FileReadingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springaicommunity.mcp.annotation.McpTool;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class FileReaderTool {
 
     private static final Logger log = LoggerFactory.getLogger(FileReaderTool.class);
-    
+
     private final FileReadingService fileReadingService;
 
     public FileReaderTool(FileReadingService fileReadingService) {
@@ -22,8 +22,11 @@ public class FileReaderTool {
     public String readFile(@McpToolParam(description = "File Name", required = true) String fileName) {
         try {
             return fileReadingService.readFile(fileName);
+        } catch (SecurityException e) {
+            log.error("Path traversal attempt blocked: {}", fileName);
+            return "Access denied: " + e.getMessage();
         } catch (Exception e) {
-            log.error("File cannot read", e); 
+            log.error("File cannot read: {}", fileName, e);
             return "Cant Find: " + e.getMessage();
         }
     }

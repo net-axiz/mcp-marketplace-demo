@@ -22,7 +22,6 @@ The system is composed of several independent components deployed as Kubernetes 
 * **McpGit**: An MCP server dedicated to interacting with Git repositories.
 * **sqlmcp**: An MCP server that explains and processes SQL queries.
 * **FileReader**: An MCP server responsible for reading documentation and files from designated paths.
-* **CalcMcp**: An MCP server handling computational or mathematical tasks.
 
 ### 3. Clients
 
@@ -49,7 +48,13 @@ To run this project, you need the following installed on your host machine:
 
 The entire stack is configured to run inside a Kubernetes namespace named `repo-explainer`. A deployment script is provided to automate the image building and manifest application.
 
-Execute the deployment script:
+Execute the all-in-one run script (deploys K8s, starts port-forward, launches RetroApp):
+
+```bash
+./run.sh
+```
+
+Or, to deploy only the K8s cluster without the UI:
 
 ```bash
 ./deploy-k8s.sh
@@ -83,7 +88,7 @@ Wait until all deployment pods show a `1/1 Running` status.
 A test script is available to simulate an MCP client handshake and tool invocation. To test the Streamable HTTP endpoint:
 
 ```bash
-./test-k8s.sh https://github.com/OpenCut-app/OpenCut
+./test.sh https://github.com/OpenCut-app/OpenCut
 ```
 
 ### Desktop Client (RetroApp)

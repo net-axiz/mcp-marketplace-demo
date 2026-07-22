@@ -16,9 +16,9 @@ public class SqlExplainerService {
         SqlQueryParts parts = sqlParser.parse(sqlQuery);
         
         if (parts.condition() == null) {
-            return String.format("Bu sorgu %s tablosundan %s verisini çeker.", parts.table(), parts.columns());
+            return String.format("This query retrieves %s data from the %s table.", parts.columns(), parts.table());
         }
 
-        return String.format("Bu sorgu %s tablosundan, %s koşuluna uyan %s verisini çeker.", parts.table(), parts.condition(), parts.columns());
+        return String.format("This query retrieves %s data from the %s table where %s.", parts.columns(), parts.table(), parts.condition());
     }
 }

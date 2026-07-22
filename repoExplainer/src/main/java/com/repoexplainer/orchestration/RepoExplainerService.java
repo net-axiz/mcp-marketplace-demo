@@ -31,27 +31,27 @@ public class RepoExplainerService {
     public String explainRepo(String githubUrl) {
         GitHubRepo ghRepo = GitHubUrlParser.parse(githubUrl)
                 .orElseThrow(() -> new IllegalArgumentException(
-                        "Geçersiz GitHub URL: " + githubUrl));
+                        "Invalid GitHub URL: " + githubUrl));
 
         String owner = ghRepo.owner();
         String repo = ghRepo.repo();
-        log.info("Repo analiz ediliyor: {}/{}", owner, repo);
+        log.info("Analyzing repo: {}/{}", owner, repo);
 
         ReadmeResult readmeResult = readmeService.fetchReadme(owner, repo);
 
         return switch (readmeResult) {
             case ReadmeResult.Found found -> {
-                log.info("README bulundu, LLM'e gönderiliyor...");
+                log.info("README found, sending to LLM...");
                 yield askLlmWithReadme(owner, repo, found.content());
             }
             case ReadmeResult.NotFound notFound -> {
-                log.info("README yok, fallback tarama başlıyor...");
+                log.info("No README, starting fallback scan...");
                 String context = fallbackScanner.scan(owner, repo);
                 yield askLlmWithFallback(owner, repo, context);
             }
             case ReadmeResult.Error error -> {
-                log.error("README çekilemedi: {}", error.reason());
-                yield "Hata: " + error.reason();
+                log.error("Failed to fetch README: {}", error.reason());
+                yield "Error: " + error.reason();
             }
         };
     }
@@ -60,7 +60,7 @@ public class RepoExplainerService {
         String safeContent = readmeContent;
         if (safeContent.length() > 5000) {
             safeContent = safeContent.substring(0, 5000) + "\n\n... (Content truncated due to length for LLM performance) ...";
-            log.warn("README çok uzun, 5000 karaktere kısaltıldı: {}/{}", owner, repo);
+            log.warn("README too long, truncated to 5000 chars: {}/{}", owner, repo);
         }
 
         String prompt = """
@@ -82,7 +82,7 @@ public class RepoExplainerService {
         String safeContent = context;
         if (safeContent.length() > 5000) {
             safeContent = safeContent.substring(0, 5000) + "\n\n... (Content truncated due to length for LLM performance) ...";
-            log.warn("Fallback içeriği çok uzun, 5000 karaktere kısaltıldı: {}/{}", owner, repo);
+            log.warn("Fallback content too long, truncated to 5000 chars: {}/{}", owner, repo);
         }
 
         String prompt = """
@@ -110,8 +110,8 @@ public class RepoExplainerService {
                     .call()
                     .content();
         } catch (Exception e) {
-            log.error("LLM çağrısı başarısız: {}", e.getMessage());
-            return "LLM çağrısı başarısız oldu: " + e.getMessage();
+            log.error("LLM call failed: {}", e.getMessage());
+            return "LLM call failed: " + e.getMessage();
         }
     }
 }

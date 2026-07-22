@@ -28,7 +28,7 @@ public class RetroApp extends JFrame {
     private Process k8sEventsProcess;
 
     public RetroApp() {
-        // Set classic Java Metal Look and Feel to mimic old-school Windows apps
+        // Set classic Java Metal Look
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class RetroApp extends JFrame {
         setTitle("Repo Explainer - Classic Edition");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null); // Center on screen
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout(10, 10));
 
         // Top Panel: URL Input, Checkbox and Button
@@ -55,12 +55,12 @@ public class RetroApp extends JFrame {
         JPanel rightTopPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         rightTopPanel.setBackground(Color.LIGHT_GRAY);
         
-        debugCheckBox = new JCheckBox("Debug Modunu Aç");
+        debugCheckBox = new JCheckBox("Debug Mode");
         debugCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 12));
         debugCheckBox.setBackground(Color.LIGHT_GRAY);
         debugCheckBox.addActionListener(e -> toggleDebugView());
 
-        analyzeButton = new JButton("Analiz Et");
+        analyzeButton = new JButton("Analyze");
         analyzeButton.setFont(new Font("Tahoma", Font.BOLD, 12));
         analyzeButton.setBackground(new Color(220, 220, 220));
 
@@ -73,7 +73,7 @@ public class RetroApp extends JFrame {
 
         add(topPanel, BorderLayout.NORTH);
 
-        // Result Text Area (Top of Split)
+        // Result Area
         resultArea = new JTextArea();
         resultArea.setFont(new Font("Monospaced", Font.PLAIN, 13));
         resultArea.setLineWrap(true);
@@ -81,9 +81,9 @@ public class RetroApp extends JFrame {
         resultArea.setEditable(false);
         resultArea.setBackground(new Color(250, 250, 250));
         JScrollPane resultScrollPane = new JScrollPane(resultArea);
-        resultScrollPane.setBorder(BorderFactory.createTitledBorder("Analiz Sonucu"));
+        resultScrollPane.setBorder(BorderFactory.createTitledBorder("Analysis Result"));
 
-        // Debug Text Area (Spring Boot Logs)
+        // Debug Area (Spring Boot Logs)
         debugArea = new JTextArea();
         debugArea.setFont(new Font("Monospaced", Font.BOLD, 12));
         debugArea.setForeground(Color.GREEN);
@@ -91,7 +91,7 @@ public class RetroApp extends JFrame {
         debugArea.setEditable(false);
         JScrollPane debugScrollPane = new JScrollPane(debugArea);
 
-        // K8s Events Text Area (Kubernetes Logs)
+        // K8s Events Area
         k8sArea = new JTextArea();
         k8sArea.setFont(new Font("Monospaced", Font.BOLD, 12));
         k8sArea.setForeground(Color.CYAN);
@@ -99,34 +99,34 @@ public class RetroApp extends JFrame {
         k8sArea.setEditable(false);
         JScrollPane k8sScrollPane = new JScrollPane(k8sArea);
 
-        // Tabbed Pane for Debugs
+        // Tabbed Pane
         debugTabs = new JTabbedPane();
-        debugTabs.addTab("Spring Boot Logları", debugScrollPane);
-        debugTabs.addTab("Kubernetes Olayları (K8s)", k8sScrollPane);
+        debugTabs.addTab("Spring Boot Logs", debugScrollPane);
+        debugTabs.addTab("Kubernetes Events", k8sScrollPane);
 
         // Split Pane
         splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, resultScrollPane, debugTabs);
-        splitPane.setResizeWeight(0.6); // 60% top, 40% bottom
+        splitPane.setResizeWeight(0.6);
         add(splitPane, BorderLayout.CENTER);
 
-        // Bottom Panel: Status
+        // Bottom Panel
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         bottomPanel.setBorder(BorderFactory.createEtchedBorder());
-        statusLabel = new JLabel("Hazır.");
+        statusLabel = new JLabel("Ready.");
         statusLabel.setFont(new Font("Tahoma", Font.PLAIN, 11));
         bottomPanel.add(statusLabel);
         add(bottomPanel, BorderLayout.SOUTH);
 
-        // Initial View State
+        // Initial state
         toggleDebugView();
 
-        // Event Listeners
+        // Event Listener
         analyzeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String url = urlField.getText().trim();
                 if (url.isEmpty()) {
-                    JOptionPane.showMessageDialog(RetroApp.this, "Lütfen bir GitHub URL'si girin.", "Hata", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(RetroApp.this, "Please enter a GitHub URL.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -134,7 +134,7 @@ public class RetroApp extends JFrame {
                 resultArea.setText("");
                 debugArea.setText("");
                 k8sArea.setText("");
-                statusLabel.setText("Durum: Sunucuya bağlanılıyor ve LLM çalıştırılıyor (Bu işlem 1-3 dakika sürebilir)...");
+                statusLabel.setText("Status: Connecting to server, running LLM (may take 1-3 minutes)...");
 
                 if (debugCheckBox.isSelected()) {
                     startLogStream();
@@ -147,12 +147,12 @@ public class RetroApp extends JFrame {
 
     private void toggleDebugView() {
         if (debugCheckBox.isSelected()) {
-            splitPane.setBottomComponent(debugTabs); // Restore debug tabs from our reference
-            splitPane.setDividerLocation(0.6); // Show 40% debug area
-            startLogStream(); // Start the streams immediately when opened
+            splitPane.setBottomComponent(debugTabs);
+            splitPane.setDividerLocation(0.6);
+            startLogStream();
         } else {
-            splitPane.setBottomComponent(null); // Hide debug area
-            stopLogStream(); // Stop streaming if user hides it
+            splitPane.setBottomComponent(null);
+            stopLogStream();
         }
     }
 
@@ -164,11 +164,11 @@ public class RetroApp extends JFrame {
     }
 
     private void startLogStream() {
-        stopLogStream(); // Ensure previous process is killed
-        appendLog(debugArea, "[RetroApp] Spring Boot log akışı başlatılıyor...");
-        appendLog(k8sArea, "[RetroApp] Kubernetes olay akışı başlatılıyor...");
+        stopLogStream();
+        appendLog(debugArea, "[RetroApp] Starting Spring Boot log stream...");
+        appendLog(k8sArea, "[RetroApp] Starting Kubernetes event stream...");
         
-        // Spring Boot Logs Stream
+        // Spring Boot Logs
         CompletableFuture.runAsync(() -> {
             try {
                 ProcessBuilder pb = new ProcessBuilder(
@@ -184,11 +184,11 @@ public class RetroApp extends JFrame {
                     }
                 }
             } catch (Exception e) {
-                appendLog(debugArea, "[HATA] Log okunamadı: " + e.getMessage());
+                appendLog(debugArea, "[ERROR] Failed to read logs: " + e.getMessage());
             }
         });
 
-        // Kubernetes Events Stream
+        // Kubernetes Events
         CompletableFuture.runAsync(() -> {
             try {
                 ProcessBuilder pb = new ProcessBuilder(
@@ -204,7 +204,7 @@ public class RetroApp extends JFrame {
                     }
                 }
             } catch (Exception e) {
-                appendLog(k8sArea, "[HATA] Olaylar okunamadı: " + e.getMessage());
+                appendLog(k8sArea, "[ERROR] Failed to read events: " + e.getMessage());
             }
         });
     }
@@ -213,19 +213,19 @@ public class RetroApp extends JFrame {
         if (kubectlProcess != null && kubectlProcess.isAlive()) {
             kubectlProcess.destroy();
             kubectlProcess = null;
-            appendLog(debugArea, "[RetroApp] Log akışı durduruldu.");
+            appendLog(debugArea, "[RetroApp] Log stream stopped.");
         }
         if (k8sEventsProcess != null && k8sEventsProcess.isAlive()) {
             k8sEventsProcess.destroy();
             k8sEventsProcess = null;
-            appendLog(k8sArea, "[RetroApp] Olay akışı durduruldu.");
+            appendLog(k8sArea, "[RetroApp] Event stream stopped.");
         }
     }
 
     private void fetchExplanationAsync(String repoUrl) {
         CompletableFuture.runAsync(() -> {
             try {
-                appendLog(debugArea, "[RetroApp] HTTP İsteği Hazırlanıyor: http://localhost:8084/api/legacy-explain?url=" + repoUrl);
+                appendLog(debugArea, "[RetroApp] Preparing HTTP request: http://localhost:8084/api/legacy-explain?url=" + repoUrl);
                 
                 HttpClient client = HttpClient.newBuilder()
                         .connectTimeout(Duration.ofSeconds(10))
@@ -235,31 +235,31 @@ public class RetroApp extends JFrame {
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(apiUrl))
-                        .timeout(Duration.ofMinutes(10)) // Wait for the LLM response
+                        .timeout(Duration.ofMinutes(10))
                         .GET()
                         .build();
 
-                appendLog(debugArea, "[RetroApp] İstek gönderildi, LLM yanıtı bekleniyor (bu kısım uzun sürebilir)...");
+                appendLog(debugArea, "[RetroApp] Request sent, waiting for LLM response (this may take a while)...");
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                appendLog(debugArea, "[RetroApp] Sunucudan yanıt geldi! Status Kodu: " + response.statusCode());
+                appendLog(debugArea, "[RetroApp] Response received! Status code: " + response.statusCode());
 
                 SwingUtilities.invokeLater(() -> {
                     if (response.statusCode() == 200) {
                         resultArea.setText(response.body());
-                        statusLabel.setText("Durum: Analiz başarıyla tamamlandı.");
+                        statusLabel.setText("Status: Analysis completed successfully.");
                     } else {
-                        resultArea.setText("Sunucu Hatası: " + response.statusCode() + "\n\n" + response.body());
-                        statusLabel.setText("Durum: Hata oluştu.");
+                        resultArea.setText("Server Error: " + response.statusCode() + "\n\n" + response.body());
+                        statusLabel.setText("Status: Error occurred.");
                     }
                     analyzeButton.setEnabled(true);
-                    stopLogStream(); // Stop reading logs after process completes
+                    stopLogStream();
                 });
 
             } catch (Exception ex) {
-                appendLog(debugArea, "[HATA] HTTP İsteği Başarısız: " + ex.getMessage());
+                appendLog(debugArea, "[ERROR] HTTP request failed: " + ex.getMessage());
                 SwingUtilities.invokeLater(() -> {
-                    resultArea.setText("Bağlantı Hatası: " + ex.getMessage() + "\n\n(Not: kubectl port-forward'ın açık olduğundan emin olun)");
-                    statusLabel.setText("Durum: Bağlantı kurulamadı.");
+                    resultArea.setText("Connection Error: " + ex.getMessage() + "\n\n(Note: Make sure kubectl port-forward is running)");
+                    statusLabel.setText("Status: Connection failed.");
                     analyzeButton.setEnabled(true);
                     stopLogStream();
                 });

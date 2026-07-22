@@ -21,24 +21,24 @@ public class GitHubReadmeService {
             String content = apiClient.fetchReadme(owner, repo);
 
             if (content != null && !content.isBlank()) {
-                log.info("README bulundu: {}/{} ({} karakter)", owner, repo, content.length());
+                log.info("README found: {}/{} ({} chars)", owner, repo, content.length());
                 return new ReadmeResult.Found(content);
             } else {
-                log.info("README bulunamadı: {}/{}", owner, repo);
+                log.info("README not found: {}/{}", owner, repo);
                 return new ReadmeResult.NotFound();
             }
 
         } catch (WebClientResponseException.Unauthorized e) {
-            log.error("401 — Geçersiz token: {}/{}", owner, repo);
-            return new ReadmeResult.Error("Geçersiz GitHub token (401)");
+            log.error("401 -- Invalid token: {}/{}", owner, repo);
+            return new ReadmeResult.Error("Invalid GitHub token (401)");
 
         } catch (WebClientResponseException.Forbidden e) {
-            log.error("403 — Rate limit veya erişim engeli: {}/{}", owner, repo);
-            return new ReadmeResult.Error("GitHub rate limit aşıldı veya erişim engellendi (403)");
+            log.error("403 -- Rate limit or access denied: {}/{}", owner, repo);
+            return new ReadmeResult.Error("GitHub rate limit exceeded or access denied (403)");
 
         } catch (Exception e) {
-            log.error("Beklenmeyen hata: {}/{} — {}", owner, repo, e.getMessage());
-            return new ReadmeResult.Error("Beklenmeyen hata: " + e.getMessage());
+            log.error("Unexpected error: {}/{} -- {}", owner, repo, e.getMessage());
+            return new ReadmeResult.Error("Unexpected error: " + e.getMessage());
         }
     }
 }

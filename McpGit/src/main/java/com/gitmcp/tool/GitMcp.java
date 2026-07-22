@@ -36,8 +36,8 @@ public class GitMcp {
 
     @McpTool(name = "Branch Name Generator", description="Generates Branch Names.")
     public String generateBranchName(
-        @McpToolParam(description = "Summary of changes.", required = true) String storyID,
-        @McpToolParam(description = "Relative issue ID.", required = true) String title) {
+        @McpToolParam(description = "Issue or Story ID.", required = true) String storyID,
+        @McpToolParam(description = "Summary of changes for the branch name.", required = true) String title) {
         return branchNamingService.generate(storyID, title);
     }
 }

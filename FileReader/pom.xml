@@ -10,10 +10,10 @@
         <version>3.4.3</version>
     </parent>
 
-    <groupId>com.FileReader</groupId>
-    <artifactId>FileReader-mcp-server</artifactId>
+    <groupId>com.filereader</groupId>
+    <artifactId>file-reader-mcp-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ikinci-mcp-server</name>
+    <name>file-reader-mcp-server</name>
 
     <properties>
         <java.version>21</java.version>

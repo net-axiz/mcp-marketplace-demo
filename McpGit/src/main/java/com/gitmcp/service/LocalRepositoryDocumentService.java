@@ -29,7 +29,7 @@ public class LocalRepositoryDocumentService implements RepositoryDocumentService
         Path fullPath = root.resolve(fileName).normalize();
 
         if (!fullPath.startsWith(root)) {
-            throw new SecurityException("Erişim reddedildi");
+            throw new SecurityException("Access denied");
         }
 
         return Files.readString(fullPath);

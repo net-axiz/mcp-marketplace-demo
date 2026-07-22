@@ -10,10 +10,10 @@
         <version>3.4.3</version>
     </parent>
 
-    <groupId>com</groupId>
-    <artifactId>mcp-server</artifactId>
+    <groupId>com.gitmcp</groupId>
+    <artifactId>mcp-git-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mcp-server</name>
+    <name>mcp-git-server</name>
 
     <properties>
         <java.version>21</java.version>

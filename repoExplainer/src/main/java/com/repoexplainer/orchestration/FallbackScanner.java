@@ -41,26 +41,26 @@ public class FallbackScanner {
 
     public String scan(String owner, String repo) {
         String branch = apiClient.fetchDefaultBranch(owner, repo);
-        log.info("Varsayılan branch: {} ({}/{})", branch, owner, repo);
+        log.info("Default branch: {} ({}/{})", branch, owner, repo);
 
         List<String> allPaths = apiClient.fetchTree(owner, repo, branch);
-        log.info("Toplam {} dosya bulundu", allPaths.size());
+        log.info("Found {} files total", allPaths.size());
 
         List<String> prioritizedPaths = prioritize(allPaths);
-        log.info("Önceliklendirilmiş {} dosya seçildi", prioritizedPaths.size());
+        log.info("Selected {} prioritized files", prioritizedPaths.size());
 
         StringBuilder context = new StringBuilder();
         int usedBudget = 0;
 
         String treeOverview = buildTreeOverview(allPaths);
-        context.append("=== DİZİN AĞACI ===\n");
+        context.append("=== DIRECTORY TREE ===\n");
         context.append(treeOverview);
         context.append("\n\n");
         usedBudget += treeOverview.length();
 
         for (String path : prioritizedPaths) {
             if (usedBudget >= CHARACTER_BUDGET) {
-                log.info("Karakter bütçesi doldu ({}/{}), kalan dosyalar atlanıyor", usedBudget, CHARACTER_BUDGET);
+                log.info("Character budget reached ({}/{}), skipping remaining files", usedBudget, CHARACTER_BUDGET);
                 break;
             }
 
@@ -71,7 +71,7 @@ public class FallbackScanner {
 
             int remaining = CHARACTER_BUDGET - usedBudget;
             if (content.length() > remaining) {
-                content = content.substring(0, remaining) + "\n... (kısaltıldı)";
+                content = content.substring(0, remaining) + "\n... (truncated)";
             }
 
             context.append("=== ").append(path).append(" ===\n");
@@ -80,7 +80,7 @@ public class FallbackScanner {
             usedBudget += content.length() + path.length() + 10;
         }
 
-        log.info("Toplam {} karakter bağlam toplandı", usedBudget);
+        log.info("Collected {} characters of context", usedBudget);
         return context.toString();
     }
 
@@ -126,7 +126,7 @@ public class FallbackScanner {
             sb.append(paths.get(i)).append("\n");
         }
         if (paths.size() > limit) {
-            sb.append("... ve ").append(paths.size() - limit).append(" dosya daha\n");
+            sb.append("... and ").append(paths.size() - limit).append(" more files\n");
         }
         return sb.toString();
     }

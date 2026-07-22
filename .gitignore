@@ -10,7 +10,7 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
-# Package Files #
+# Package Files
 *.jar
 *.war
 *.nar
@@ -19,7 +19,7 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# JVM crash logs
 hs_err_pid*
 replay_pid*
 
@@ -35,6 +35,10 @@ buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
 
+# Spring Boot
+*.pid
+spring-boot-devtools.properties
+
 # IDEs
 .idea/
 *.iml
@@ -43,6 +47,26 @@ buildNumber.properties
 .classpath
 .settings/
 .vscode/
+*.swp
+*.swo
+*~
+.factorypath
+.apt_generated/
+.apt_generated_tests/
+out/
+bin/
+
+# Environment / Secrets
+.env
+.env.local
+.env.*.local
+
+# K8s Secrets
+k8s/*secret*.yaml
+k8s/01-secret.yaml
+
+# Docker
+*.pid
 
 # OS generated files
 .DS_Store
@@ -52,7 +76,8 @@ buildNumber.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# K8s Secrets
-k8s/*secret*.yaml
-k8s/01-secret.yaml
+# AI / Agent config
+.agents/
+.gemini/

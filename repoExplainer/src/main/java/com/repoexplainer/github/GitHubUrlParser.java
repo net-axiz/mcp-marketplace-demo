@@ -4,30 +4,10 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/*
- * Desteklenen formatlar:
- * - https://github.com/owner/repo
- * - http://github.com/owner/repo
- * - www.github.com/owner/repo
- * - github.com/owner/repo
- * - owner/repo
- * - https://github.com/owner/repo.git
- * - https://github.com/owner/repo/
- */
+// Supported formats: https://github.com/owner/repo, owner/repo, with optional .git suffix
 public class GitHubUrlParser {
     public record GitHubRepo(String owner, String repo) {}
 
-    /*
-     * Regex açıklaması:
-     * ^(?:https?://)?   → İsteğe bağlı http:// veya https://
-     * (?:www\.)?        → İsteğe bağlı www.
-     * (?:github\.com/)? → İsteğe bağlı github.com/
-     * ([^/]+)           → 1. Grup = Owner (/ haricindeki karakterler)
-     * /                 → Araya giren /
-     * ([^/]+?)          → 2. Grup = Repo (tembel eşleştirme)
-     * (?:\.git)?        → İsteğe bağlı .git uzantısı
-     * /?$               → İsteğe bağlı sondaki / ve satır sonu
-     */
     private static final Pattern GITHUB_PATTERN = Pattern.compile(
             "^(?:https?://)?(?:www\\.)?(?:github\\.com/)?([^/]+)/([^/]+?)(?:\\.git)?/?$"
     );

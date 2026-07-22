@@ -37,7 +37,7 @@ public class GitHubApiClient {
             return null;
 
         } catch (WebClientResponseException.NotFound e) {
-            log.debug("README bulunamadı: {}/{}", owner, repo);
+            log.debug("README not found: {}/{}", owner, repo);
             return null;
         }
     }
@@ -73,7 +73,7 @@ public class GitHubApiClient {
                 }
             }
         } catch (WebClientResponseException e) {
-            log.error("Dosya ağacı çekilemedi: {}/{} branch={} — {}", owner, repo, branch, e.getMessage());
+            log.error("Failed to fetch file tree: {}/{} branch={} -- {}", owner, repo, branch, e.getMessage());
         }
 
         return paths;
@@ -93,7 +93,7 @@ public class GitHubApiClient {
             return null;
 
         } catch (WebClientResponseException e) {
-            log.warn("Dosya içeriği çekilemedi: {}/{}/{} — {}", owner, repo, path, e.getMessage());
+            log.warn("Failed to fetch file content: {}/{}/{} -- {}", owner, repo, path, e.getMessage());
             return null;
         }
     }
